@@ -89,23 +89,50 @@
 	}
 	
 	$avg_function = array();
+	$max_function = array();
+	$min_function = array();
 
 	foreach($array_function as $func => $content)
 	{
 		$total = 0.0;
 		$count = count($content);
+		$max_tmp = 0.0;
+		$min_tmp = INF;
 		// echo gettype($content)."<br>";
 		for($i=0;$i<$count;$i++)
 		{
 			$total += $content[$i];
+			if($content[$i]>$max_tmp)
+			{
+				$max_tmp = $content[$i];
+			}
+			if($content[$i]<$min_tmp)
+			{
+				$min_tmp = $content[$i];
+			}
 			// echo $func." ".$content[$i]."<br>";
 		}
-		$avg_function[$func] = $total/$count;
+		if($count != 0)
+		{
+			$avg_function[$func] = $total/$count;
+			$max_function[$func] = $max_tmp;
+			$min_function[$func] = $min_tmp;
+		}
 	}
 
 	foreach($avg_function as $func => $content)
 	{
 		echo $func." avg. = ".$content."<br>";
+	}
+	echo "<br>";
+	foreach($max_function as $func => $content)
+	{
+		echo $func." max. = ".$content."<br>";
+	}
+	echo "<br>";
+	foreach($min_function as $func => $content)
+	{
+		echo $func." min. = ".$content."<br>";
 	}
 
     // delete upload file
