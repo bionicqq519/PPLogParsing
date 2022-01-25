@@ -5,7 +5,9 @@
 	<!-- 這裡是 HTML 語法的 header 頁首引用宣告區 -->
 </head>
 <body>
-
+	<html>
+		<a href="profiling.php">回到首頁</a><br><br>
+	</html>
 	<!-- 這裡是 HTML 語法的 主要資料區 -->
 	<?php
 	error_reporting(E_ALL);
@@ -14,7 +16,13 @@
 	//[start] 接收檔案
     $fileName = "";
     $folder = "upload";
-	if ($_FILES["file"]["error"] > 0)
+
+	if (empty($_FILES["file"]))	//if (isset($_FILES["file"]))
+	{
+		echo "Error: No data submit<br />";
+        return;
+	}
+	else if ($_FILES["file"]["error"] > 0)
 	{
 		echo "Error: " . $_FILES["file"]["error"] . "<br />";
         return;

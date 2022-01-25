@@ -8,6 +8,8 @@
 
 	<!-- 這裡是 HTML 語法的 主要資料區 -->
 	<html>
+		<a href="allusers.php">後台</a><br><br>
+
 		<form action="upload.php" method="POST" enctype="multipart/form-data">
 			<label>選擇檔案</label>&nbsp
 			<input type="file" id="file" name="file" /><br>
