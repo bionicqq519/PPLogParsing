@@ -1,3 +1,6 @@
+<?php
+    require_once 'db.php';
+?>
 <html>
 <head>
 	<!-- 這裡是 HTML 語法的 header 頁首引用宣告區 -->
@@ -66,13 +69,30 @@
 		return substr($input_arr, $left_idx, ($right_idx-$left_idx));
 	}
 
+	//連線資料庫
+	$conn = connnetDb();
+	//查詢資料表中的所有資料,並按照id降序排列
+	$result = mysqli_query($conn, "SELECT * FROM function_tb ORDER BY function_name DESC");
+	//獲取資料表的資料條數
+	$dataCount = mysqli_num_rows($result);
+	//列印輸出所有資料
+	//echo $dataCount;
 
-	$array_function = array("Convert_to_YV21" => array(),
-							"TNR" => array(),
-							"2ndPP" => array(),
-							"LVSharp" => array(),
-						    "Convert_from_YV21" => array(),
-						    "alPP_Instance_algoRun" => array());
+	$array_function = array();
+	for($i=0;$i<$dataCount;$i++){
+		$result_arr = mysqli_fetch_assoc($result);
+		$fn = $result_arr['function_name'];
+		//print_r($result_arr);
+		// echo $fn." ";
+		$array_function[$fn] = array();
+	}
+	
+	// $array_function = array("Convert_to_YV21" => array(),
+	// 						"TNR" => array(),
+	// 						"2ndPP" => array(),
+	// 						"LVSharp" => array(),
+	// 					    "Convert_from_YV21" => array(),
+	// 					    "alPP_Instance_algoRun" => array());
 
 	$file_path = $folder."/".$fileName;//"./alPP_log.txt";
 	$file_arr = file($file_path);
@@ -91,7 +111,7 @@
 					 //echo $file_arr[$i]."<br>";
 					//echo gettype($content[0]);
 				}
-				// echo $func."<br>";
+				//echo $func."<br>";
 			}
 		}
 	}
