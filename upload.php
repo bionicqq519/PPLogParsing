@@ -6,6 +6,18 @@
 	<!-- 這裡是 HTML 語法的 header 頁首引用宣告區 -->
 	<!-- 這裡是 HTML 語法的 header 頁首引用宣告區 -->
 	<!-- 這裡是 HTML 語法的 header 頁首引用宣告區 -->
+	<style>
+        table{
+            border-collapse: collapse;
+        }
+        th,td{
+            border:1px solid #ccccff;
+            padding: 5px;
+        }
+        td{
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 	<html>
@@ -72,7 +84,7 @@
 	//連線資料庫
 	$conn = connnetDb();
 	//查詢資料表中的所有資料,並按照id降序排列
-	$result = mysqli_query($conn, "SELECT * FROM function_tb ORDER BY function_name DESC");
+	$result = mysqli_query($conn, "SELECT * FROM function_tb ORDER BY function_name DESC");	//"SELECT * FROM function_tb ORDER BY function_name DESC"
 	//獲取資料表的資料條數
 	$dataCount = mysqli_num_rows($result);
 	//列印輸出所有資料
@@ -116,9 +128,7 @@
 		}
 	}
 	
-	$avg_function = array();
-	$max_function = array();
-	$min_function = array();
+	$calculation_all = array();
 
 	foreach($array_function as $func => $content)
 	{
@@ -142,26 +152,28 @@
 		}
 		if($count != 0)
 		{
-			$avg_function[$func] = $total/$count;
-			$max_function[$func] = $max_tmp;
-			$min_function[$func] = $min_tmp;
+			$calculation_all[$func] = array($total/$count, $max_tmp, $min_tmp);
 		}
 	}
 
-	foreach($avg_function as $func => $content)
+	// avg, max, min
+	echo "<table>
+			<tr>
+				<th>function</th>
+				<th>avg.</th>
+				<th>max.</th>
+				<th>min.</th>
+			</tr>";
+	foreach($calculation_all as $func => $content)
 	{
-		echo $func." avg. = ".$content."<br>";
+		echo "<tr>";
+		echo "<td>".$func."</td>";
+		echo "<td>".$content[0]."</td>";
+		echo "<td>".$content[1]."</td>";
+		echo "<td>".$content[2]."</td>";
+		echo "</tr>";
 	}
-	echo "<br>";
-	foreach($max_function as $func => $content)
-	{
-		echo $func." max. = ".$content."<br>";
-	}
-	echo "<br>";
-	foreach($min_function as $func => $content)
-	{
-		echo $func." min. = ".$content."<br>";
-	}
+	echo "</table><br>";
 
     // delete upload file
     delFile($folder);
