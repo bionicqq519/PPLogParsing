@@ -96,7 +96,7 @@
 		$fn = $result_arr['function_name'];
 		//print_r($result_arr);
 		// echo $fn." ";
-		$array_function[$fn] = array();
+		$array_function["$fn"] = array();
 	}
 	
 	// $array_function = array("Convert_to_YV21" => array(),
@@ -116,9 +116,10 @@
 			// echo $file_arr[$i]."<br>";
 			foreach($array_function as $func => $content)
 			{
-				if(strpos($file_arr[$i], $func))
+				// echo "@".gettype($func)."@";
+				if(strpos($file_arr[$i], (string)$func))
 				{
-					$array_function[$func][] = floatval(parseStr($file_arr[$i], "= [", "]"));
+					$array_function["$func"][] = floatval(parseStr($file_arr[$i], "= [", "]"));
 					// $array_function[$key][] = 1.0;
 					 //echo $file_arr[$i]."<br>";
 					//echo gettype($content[0]);
@@ -152,7 +153,7 @@
 		}
 		if($count != 0)
 		{
-			$calculation_all[$func] = array($total/$count, $max_tmp, $min_tmp);
+			$calculation_all["$func"] = array($total/$count, $max_tmp, $min_tmp);
 		}
 	}
 
