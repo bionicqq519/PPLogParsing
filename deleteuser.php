@@ -18,3 +18,4 @@ if(mysqli_error($conn)){
 }else{
     header("Location:allusers.php");
 }
+?>

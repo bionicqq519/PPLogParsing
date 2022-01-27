@@ -84,7 +84,7 @@
 	//連線資料庫
 	$conn = connnetDb();
 	//查詢資料表中的所有資料,並按照id降序排列
-	$result = mysqli_query($conn, "SELECT * FROM function_tb ORDER BY function_name DESC");	//"SELECT * FROM function_tb ORDER BY function_name DESC"
+	$result = mysqli_query($conn, "SELECT function_name FROM function_tb ORDER BY step ASC");	//"SELECT * FROM function_tb ORDER BY function_name DESC"
 	//獲取資料表的資料條數
 	$dataCount = mysqli_num_rows($result);
 	//列印輸出所有資料

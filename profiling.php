@@ -5,7 +5,6 @@
 	<!-- 這裡是 HTML 語法的 header 頁首引用宣告區 -->
 </head>
 <body>
-
 	<!-- 這裡是 HTML 語法的 主要資料區 -->
 	<html>
 		<a href="allusers.php">後台</a><br><br>
